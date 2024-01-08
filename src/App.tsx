@@ -1,10 +1,15 @@
 import React from 'react';
 import './App.css';
+import { Header } from './components/Header';
+import { Sidebar } from './components/Sidebar';
+import { ProfilePage } from './components/ProfilePage';
 
 function App() {
   return (
     <div className="App">
-     Hello, samurai! Let's go!
+     <Header />
+     <Sidebar />
+     <ProfilePage />
     </div>
   );
 }
