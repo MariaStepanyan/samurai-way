@@ -6,22 +6,3 @@
     'h h'
     's p';
 }
-
-.header {
-  grid-area: h;
-  background-color: rgb(247, 247, 222);
-}
-
-.header img {
-  width: 60px;
-}
-
-.sidebar {
-  grid-area: s;
-  background-color: rgb(233, 233, 233);
-}
-
-.profilePage {
-  grid-area: p;
-  background-color: rgb(189, 189, 255)
-}

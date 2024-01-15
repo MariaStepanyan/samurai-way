@@ -1,0 +1,12 @@
+.sidebar {
+  grid-area: s;
+  background-color: rgb(23, 0, 54);
+}
+
+.item {
+  color: rgb(189, 189, 255);
+}
+
+.item.active {
+  color: blanchedalmond;
+}

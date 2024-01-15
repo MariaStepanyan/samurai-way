@@ -1,0 +1,10 @@
+.item {
+  color: rgb(23, 0, 54);
+}
+
+.item img {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
