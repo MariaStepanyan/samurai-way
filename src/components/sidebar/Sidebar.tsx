@@ -7,13 +7,16 @@ export const Sidebar = () => {
         <a>Profile</a>
       </div>
       <div className={`${s.item} ${s.active}`}>
-        <a>b</a>
+        <a>Messages</a>
       </div>
       <div className={s.item}>
-        <a>c</a>
+        <a>News</a>
       </div>
       <div className={s.item}>
-        <a>d</a>
+        <a>Music</a>
+      </div>
+      <div className={s.item}>
+        <a>Settings</a>
       </div>
     </div>
   )

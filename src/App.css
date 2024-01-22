@@ -4,5 +4,10 @@
   grid-template-columns: 2fr 10fr;
   grid-template-areas:
     'h h'
-    's p';
+    's c';
+}
+
+.app-wrapper-content {
+  grid-area: c;
+  background-color: rgb(189, 189, 255);
 }
