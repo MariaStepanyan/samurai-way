@@ -1,12 +1,14 @@
 .sidebar {
   grid-area: s;
   background-color: rgb(23, 0, 54);
+  padding: 20px
 }
 
-.item {
+.item a{
   color: rgb(189, 189, 255);
+  text-decoration: none;
 }
 
-.item.active {
+.item a.active {
   color: blanchedalmond;
 }
