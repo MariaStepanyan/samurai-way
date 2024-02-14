@@ -1,41 +1,15 @@
+import { FC } from 'react'
+import { Dialogprops, MessageType } from '../..'
 import s from './Dialogs.module.css'
 import { DialogItem } from './dialogItem/DialogItem'
 import { Message } from './message/Message'
 
-const dialogs = [
-  {
-    name: 'Dimych',
-    id: 1,
-  },
-  {
-    name: 'Andrey',
-    id: 2,
-  },
-  {
-    name: 'Viktor',
-    id: 3,
-  },
-  {
-    name: 'Sasha',
-    id: 4,
-  },
-  {
-    name: 'Valera',
-    id: 5,
-  },
-  {
-    name: 'Sveta',
-    id: 6,
-  },
-]
+type DialogsProps = {
+  dialogs: Dialogprops[]
+  messages: MessageType[]
+}
 
-const messages = [
-  { id: 1, text: 'Om' },
-  { id: 2, text: 'Ah' },
-  { id: 3, text: 'Hum' },
-]
-
-export const Dialogs = () => {
+export const Dialogs: FC<DialogsProps> = ({ dialogs, messages }) => {
   return (
     <div className={s.dialogs}>
       <div className={s.dialogsItems}>

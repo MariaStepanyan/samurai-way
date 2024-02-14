@@ -5,7 +5,7 @@ export const Sidebar = () => {
   return (
     <div className={s.sidebar}>
       <div className={s.item}>
-        <NavLink to="/profilePage" activeClassName={s.active}>
+        <NavLink to="/Profile" activeClassName={s.active}>
           Profile
         </NavLink>
       </div>
