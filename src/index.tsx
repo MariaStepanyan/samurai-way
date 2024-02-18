@@ -52,7 +52,7 @@ export type PostType = {
   like: number
 }
 
-const posts: PostType[] = [
+export const posts: PostType[] = [
   { id: 1, text: 'Hi, how are you', like: 15 },
   { id: 2, text: "it's my first post", like: 20 },
 ]
