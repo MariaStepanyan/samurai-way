@@ -15,6 +15,11 @@ const posts: PostType[] = [
   { id: 2, text: "it's my first post", like: 20 },
 ]
 
+const addPost = (newText: string) => {
+  const newPost = { id: 5, text: newText, like: 10 }
+  posts.push(newPost)
+}
+
 export const ProfilePage = () => {
-  return <Profile posts={posts} />
+  return <Profile posts={posts} addPost={addPost} />
 }

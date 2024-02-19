@@ -16,6 +16,12 @@ const posts: PostType[] = [
 ]
 
 
+const addPost = (newText:string) => {
+
+  const newPost = {id:5, text:newText, like:10}
+  posts.push(newPost)
+}
+
 export const Posts = () => {
-  return <MyPosts posts={posts} />
+  return <MyPosts posts={posts} addPost={addPost}/>
 }
