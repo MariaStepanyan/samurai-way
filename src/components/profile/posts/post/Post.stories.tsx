@@ -5,5 +5,5 @@ export default {
 }
 
 export const MyPost = () => {
-  return <Post text={'some text' } like ={5}/>
+  return <Post text={'some text'} like={5} />
 }

@@ -8,21 +8,15 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import { News } from './components/news/News'
 import { Music } from './components/music/Music'
 import { Settings } from './components/settings/Settings'
-import { Dialogprops, MessageType, PostType } from './redux/state'
+import { storeType } from './redux/state'
 
 type AppProps = {
-  state: {
-    profilePage: { posts: PostType[]; newPostText: string }
-    messagesPage: { dialogs: Dialogprops[]; messages: MessageType[] }
-  }
-  addPost: () => void
-  updateNewPostChange: (newText: string) => void
+  store: storeType
 }
 
 function App(props: AppProps) {
-  const { posts, newPostText } = props.state.profilePage
-  const { dialogs, messages } = props.state.messagesPage
-  const {addPost, updateNewPostChange} = props
+  const { store } = props
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -31,9 +25,9 @@ function App(props: AppProps) {
         <div className="app-wrapper-content">
           <Route
             path={'/dialogs'}
-            render={() => <Dialogs dialogs={dialogs} messages={messages} />}
+            render={() => <Dialogs state={store.getState()} />}
           />
-          <Route path={'/Profile'} render={() => <Profile posts={posts} addPost={addPost} newPostText={newPostText} updateNewPostChange={updateNewPostChange}/>} />
+          <Route path={'/Profile'} render={() => <Profile store={store} />} />
           <Route path={'/news'} render={() => <News />} />
           <Route path={'/music'} render={() => <Music />} />
           <Route path={'/settings'} render={() => <Settings />} />
