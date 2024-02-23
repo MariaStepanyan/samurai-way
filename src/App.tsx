@@ -12,16 +12,17 @@ import { Dialogprops, MessageType, PostType } from './redux/state'
 
 type AppProps = {
   state: {
-    profilePage: { posts: PostType[] }
+    profilePage: { posts: PostType[]; newPostText: string }
     messagesPage: { dialogs: Dialogprops[]; messages: MessageType[] }
   }
-  addPost: (newText: string) => void
+  addPost: () => void
+  updateNewPostChange: (newText: string) => void
 }
 
 function App(props: AppProps) {
-  const { posts } = props.state.profilePage
+  const { posts, newPostText } = props.state.profilePage
   const { dialogs, messages } = props.state.messagesPage
-  const {addPost} = props
+  const {addPost, updateNewPostChange} = props
   return (
     <BrowserRouter>
       <div className="App">
@@ -32,7 +33,7 @@ function App(props: AppProps) {
             path={'/dialogs'}
             render={() => <Dialogs dialogs={dialogs} messages={messages} />}
           />
-          <Route path={'/Profile'} render={() => <Profile posts={posts} addPost={addPost}/>} />
+          <Route path={'/Profile'} render={() => <Profile posts={posts} addPost={addPost} newPostText={newPostText} updateNewPostChange={updateNewPostChange}/>} />
           <Route path={'/news'} render={() => <News />} />
           <Route path={'/music'} render={() => <Music />} />
           <Route path={'/settings'} render={() => <Settings />} />

@@ -15,11 +15,24 @@ const posts: PostType[] = [
   { id: 2, text: "it's my first post", like: 20 },
 ]
 
-const addPost = (newText: string) => {
-  const newPost = { id: 5, text: newText, like: 10 }
+let newPostText = ''
+
+const addPost = () => {
+  const newPost = { id: 5, text: newPostText, like: 10 }
   posts.push(newPost)
+}
+const updateNewPostChange = (newText: string) => {
+  newPostText = newText
+
 }
 
 export const ProfilePage = () => {
-  return <Profile posts={posts} addPost={addPost} />
+  return (
+    <Profile
+      posts={posts}
+      addPost={addPost}
+      newPostText={newPostText}
+      updateNewPostChange={updateNewPostChange}
+    />
+  )
 }

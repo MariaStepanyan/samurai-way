@@ -1,3 +1,5 @@
+import { rerenderEntireTree } from '../render'
+
 export type Dialogprops = {
   name: string
   id: number
@@ -20,6 +22,7 @@ export const state = {
       { id: 1, text: 'Hi, how are you', like: 15 },
       { id: 2, text: "it's my first post", like: 20 },
     ],
+    newPostText: '',
   },
   messagesPage: {
     dialogs: <Dialogprops[]>[
@@ -38,7 +41,14 @@ export const state = {
   },
 }
 
-export const addPost = (newText: string) => {
-  const newPost: PostType = { id: 5, text: newText, like: 10 }
+export const addPost = () => {
+  const newPost: PostType = { id: 5, text: state.profilePage.newPostText, like: 10 }
   state.profilePage.posts.push(newPost)
+  state.profilePage.newPostText =''
+  rerenderEntireTree(state)
+}
+
+export const updateNewPostChange = (newText: string) => {
+  state.profilePage.newPostText = newText
+  rerenderEntireTree(state)
 }

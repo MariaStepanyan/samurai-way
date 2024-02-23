@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { ChangeEvent, FC, useState } from 'react'
 import s from './MyPosts.module.css'
 import { Post } from './post/Post'
 import { PostType } from '../../../redux/state'
@@ -6,16 +6,29 @@ import React from 'react'
 
 type MyPostsProps = {
   posts: PostType[]
-  addPost: (newText: string) => void
+  addPost: () => void
+  newPostText: string
+  updateNewPostChange: (newText: string) => void
 }
 
-export const MyPosts: FC<MyPostsProps> = ({ posts, addPost }) => {
+export const MyPosts: FC<MyPostsProps> = ({
+  posts,
+  addPost,
+  newPostText,
+  updateNewPostChange,
+}) => {
+  const postsElement = posts.map((post, index) => (
+    <Post key={index} text={post.text} like={post.like} />
+  ))
+
   const newPostElement = React.createRef<HTMLTextAreaElement>()
 
   const onAddPost = () => {
-    if (newPostElement.current) {
-      addPost(newPostElement.current.value)
-    }
+    addPost()
+  }
+
+  const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    updateNewPostChange(e.currentTarget.value)
   }
 
   return (
@@ -23,17 +36,17 @@ export const MyPosts: FC<MyPostsProps> = ({ posts, addPost }) => {
       <h3>My Posts</h3>
       <div>
         <div>
-          <textarea ref={newPostElement}></textarea>
+          <textarea
+            ref={newPostElement}
+            value={newPostText}
+            onChange={onPostChange}
+          ></textarea>
         </div>
         <div>
           <button onClick={onAddPost}>Add post</button>
         </div>
       </div>
-      <div className={s.posts}>
-        {posts.map((post) => (
-          <Post text={post.text} like={post.like} />
-        ))}
-      </div>
+      <div className={s.posts}>{postsElement}</div>
     </div>
   )
 }
