@@ -1,6 +1,14 @@
+import imgDimich from '../assets/images/Dimich.jpg'
+import imgAndrey from '../assets/images/Andrey.jpg'
+import imgViktor from '../assets/images/Viktor.jpg'
+import imgSasha from '../assets/images/Sasha.jpg'
+import imgValera from '../assets/images/Valera.jpg'
+import imgSveta from '../assets/images/Sveta.jpg'
+
 export type Dialogprops = {
   name: string
   id: number
+  img: string
 }
 
 export type MessageType = {
@@ -14,6 +22,11 @@ export type PostType = {
   like: number
 }
 
+export type friendstype = {
+  name: string
+  id: number
+}
+
 export type RootStateType = {
   profilePage: {
     posts: PostType[]
@@ -22,6 +35,9 @@ export type RootStateType = {
   messagesPage: {
     dialogs: Dialogprops[]
     messages: MessageType[]
+  }
+  sidebar: {
+    friends: friendstype[]
   }
 }
 
@@ -45,17 +61,24 @@ export let store: storeType = {
     },
     messagesPage: {
       dialogs: [
-        { name: 'Dimych', id: 1 },
-        { name: 'Andrey', id: 2 },
-        { name: 'Viktor', id: 3 },
-        { name: 'Sasha', id: 4 },
-        { name: 'Valera', id: 5 },
-        { name: 'Sveta', id: 6 },
+        { name: 'Dimych', id: 1, img: imgDimich },
+        { name: 'Andrey', id: 2, img: imgAndrey },
+        { name: 'Viktor', id: 3, img: imgViktor },
+        { name: 'Sasha', id: 4, img: imgSasha },
+        { name: 'Valera', id: 5, img: imgValera },
+        { name: 'Sveta', id: 6, img: imgSveta },
       ],
       messages: [
         { id: 1, text: 'Om' },
         { id: 2, text: 'Ah' },
         { id: 3, text: 'Hum' },
+      ],
+    },
+    sidebar: {
+      friends: [
+        { name: 'Sasha', id: 1 },
+        { name: 'Sveta', id: 2 },
+        { name: 'Valera', id: 3 },
       ],
     },
   },

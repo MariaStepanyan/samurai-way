@@ -21,7 +21,7 @@ function App(props: AppProps) {
     <BrowserRouter>
       <div className="App">
         <Header />
-        <Sidebar />
+        <Sidebar state={store.getState()} />
         <div className="app-wrapper-content">
           <Route
             path={'/dialogs'}

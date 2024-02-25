@@ -1,14 +1,40 @@
 .sidebar {
   grid-area: s;
   background-color: rgb(23, 0, 54);
-  padding: 20px
+  padding: 20px;
 }
 
-.item a{
+.item a {
   color: rgb(189, 189, 255);
   text-decoration: none;
 }
 
 .item a.active {
+  color: blanchedalmond;
+}
+
+.friends {
+  display: flex;
+  color: rgb(189, 189, 255);
+  gap: 10px;
+  margin: 10px 0;
+  align-items: center;
+}
+
+.dot {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgb(189, 189, 255);
+  margin: auto 5px;
+}
+
+.friendName {
+  width: 50px;
+}
+
+.headerName {
+  margin-top: 50px;
   color: blanchedalmond;
 }

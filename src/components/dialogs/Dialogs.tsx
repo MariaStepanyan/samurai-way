@@ -22,7 +22,7 @@ export const Dialogs: FC<DialogsProps> = ({ state }) => {
     <div className={s.dialogs}>
       <div className={s.dialogsItems}>
         {dialogs.map((d) => (
-          <DialogItem key={d.id} name={d.name} id={d.id} />
+          <DialogItem img={d.img} key={d.id} name={d.name} id={d.id} />
         ))}
       </div>
       <div className={s.messages}>

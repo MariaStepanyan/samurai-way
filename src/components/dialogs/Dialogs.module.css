@@ -1,11 +1,12 @@
 .dialogs {
   display: grid;
   grid-template-columns: 2fr 10fr;
-  padding: 10px
+  padding: 10px;
 }
 
 .dialogsItems .dialog a{
-text-decoration: none
+text-decoration: none;
+margin-bottom: 20px
 }
 
 .messages {
@@ -17,5 +18,16 @@ text-decoration: none
 }
 
 .dialogsItems .active a{
+  display: flex;
+  flex-direction: column;
   color: rgba(139, 0, 139, 0.884);
+  width: 55px;
+  align-items: center;
+}
+
+.dialogAvatar {
+  display: inline-block;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
 }
