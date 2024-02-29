@@ -43,11 +43,10 @@ export type RootStateType = {
 
 export type storeType = {
   _state: RootStateType
-  getState: () => RootStateType
   _callsuscriber: () => void
-  addPost: () => void
-  updateNewPostText: (newText: string) => void
+  getState: () => RootStateType
   subscribe: (observer: () => void) => void
+  dispatch: (action: any) => void
 }
 
 export let store: storeType = {
@@ -82,25 +81,26 @@ export let store: storeType = {
       ],
     },
   },
+  _callsuscriber() {},
   getState() {
     return this._state
   },
-  _callsuscriber() {},
-  addPost() {
-    const newPost: PostType = {
-      id: 5,
-      text: this._state.profilePage.newPostText,
-      like: 10,
-    }
-    this._state.profilePage.posts.push(newPost)
-    this._state.profilePage.newPostText = ''
-    this._callsuscriber()
-  },
-  updateNewPostText(newText: string) {
-    this._state.profilePage.newPostText = newText
-    this._callsuscriber()
-  },
   subscribe(observer: () => void) {
     this._callsuscriber = observer
+  },
+  dispatch(action) {
+    if (action.type === 'ADD-POST') {
+      const newPost: PostType = {
+        id: 5,
+        text: this._state.profilePage.newPostText,
+        like: 10,
+      }
+      this._state.profilePage.posts.push(newPost)
+      this._state.profilePage.newPostText = ''
+      this._callsuscriber()
+    } else if (action.type === 'UPDATE-NEWPOST-TEST') {
+      this._state.profilePage.newPostText = action.newText
+      this._callsuscriber()
+    }
   },
 }

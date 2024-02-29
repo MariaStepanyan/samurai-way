@@ -6,5 +6,7 @@ export default {
 }
 
 export const Posts = () => {
-  return <MyPosts store={store} state={store.getState()} />
+  const state = store.getState()
+  const dispatch = store.dispatch
+  return <MyPosts state={state} dispatch={dispatch} />
 }

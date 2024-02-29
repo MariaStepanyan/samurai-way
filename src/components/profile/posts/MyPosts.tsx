@@ -1,30 +1,27 @@
 import { ChangeEvent, FC } from 'react'
 import s from './MyPosts.module.css'
 import { Post } from './post/Post'
-import { RootStateType, storeType } from '../../../redux/state'
+import { RootStateType } from '../../../redux/state'
 
 type MyPostsProps = {
-  store: storeType
   state: RootStateType
+  dispatch: (action: any) => void
 }
 
-export const MyPosts: FC<MyPostsProps> = ({ state, store }) => {
+export const MyPosts: FC<MyPostsProps> = ({ state, dispatch }) => {
   const { posts, newPostText } = state.profilePage
-  let { addPost, updateNewPostText } = store
-
-  addPost = addPost.bind(store)
-  updateNewPostText = updateNewPostText.bind(store)
 
   const postsElement = posts.map((post, index) => (
     <Post key={index} text={post.text} like={post.like} />
   ))
 
   const onAddPost = () => {
-    addPost()
+    dispatch({ type: 'ADD-POST' })
   }
 
   const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    updateNewPostText(e.currentTarget.value)
+    let text = e.currentTarget.value
+    dispatch({ type: 'UPDATE-NEWPOST-TEST', newText: text })
   }
 
   return (

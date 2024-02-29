@@ -1,17 +1,18 @@
 import { FC } from 'react'
 import { MyPosts } from './posts/MyPosts'
 import { ProfileInfo } from './profileInfo/ProfileInfo'
-import { storeType } from '../../redux/state'
+import { RootStateType } from '../../redux/state'
 
 type ProfileProps = {
-  store: storeType
+  state: RootStateType
+  dispatch: (action: any) => void
 }
 
-export const Profile: FC<ProfileProps> = ({ store }) => {
+export const Profile: FC<ProfileProps> = ({ state, dispatch }) => {
   return (
     <div>
       <ProfileInfo />
-      <MyPosts store={store} state={store.getState()} />
+      <MyPosts state={state} dispatch={dispatch} />
     </div>
   )
 }

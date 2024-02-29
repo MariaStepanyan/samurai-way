@@ -12,22 +12,28 @@ import { storeType } from './redux/state'
 
 type AppProps = {
   store: storeType
+  dispatch: (action: any) => void
 }
 
 function App(props: AppProps) {
-  const { store } = props
+  const { store, dispatch } = props
 
   return (
     <BrowserRouter>
-      <div className="App">
+      <div className='App'>
         <Header />
         <Sidebar state={store.getState()} />
-        <div className="app-wrapper-content">
+        <div className='app-wrapper-content'>
           <Route
             path={'/dialogs'}
             render={() => <Dialogs state={store.getState()} />}
           />
-          <Route path={'/Profile'} render={() => <Profile store={store} />} />
+          <Route
+            path={'/Profile'}
+            render={() => (
+              <Profile state={store.getState()} dispatch={dispatch} />
+            )}
+          />
           <Route path={'/news'} render={() => <News />} />
           <Route path={'/music'} render={() => <Music />} />
           <Route path={'/settings'} render={() => <Settings />} />
