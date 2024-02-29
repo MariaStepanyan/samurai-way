@@ -1,11 +1,17 @@
 import { ChangeEvent, FC } from 'react'
 import s from './MyPosts.module.css'
 import { Post } from './post/Post'
-import { RootStateType } from '../../../redux/state'
+import {
+  ActionType,
+  RootStateType,
+  addPostAC,
+  postChangeAC,
+} from '../../../redux/state'
+import { Form } from '../../common/Form'
 
 type MyPostsProps = {
   state: RootStateType
-  dispatch: (action: any) => void
+  dispatch: (action: ActionType) => void
 }
 
 export const MyPosts: FC<MyPostsProps> = ({ state, dispatch }) => {
@@ -16,25 +22,23 @@ export const MyPosts: FC<MyPostsProps> = ({ state, dispatch }) => {
   ))
 
   const onAddPost = () => {
-    dispatch({ type: 'ADD-POST' })
+    dispatch(addPostAC(newPostText))
   }
 
   const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     let text = e.currentTarget.value
-    dispatch({ type: 'UPDATE-NEWPOST-TEST', newText: text })
+    dispatch(postChangeAC(text))
   }
 
   return (
     <div className={s.postsBlock}>
       <h3>My Posts</h3>
-      <div>
-        <div>
-          <textarea value={newPostText} onChange={onPostChange}></textarea>
-        </div>
-        <div>
-          <button onClick={onAddPost}>Add post</button>
-        </div>
-      </div>
+      <Form
+        btnName={'Add post'}
+        newValueText={newPostText}
+        onValueChange={onPostChange}
+        onAddValue={onAddPost}
+      />
       <div className={s.posts}>{postsElement}</div>
     </div>
   )

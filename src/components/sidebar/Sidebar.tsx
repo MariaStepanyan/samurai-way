@@ -39,7 +39,7 @@ export const Sidebar: FC<SidebarType> = ({ state }) => {
         <h2 className={s.headerName}>Friends</h2>
         <div className={s.friends}>
           {state.sidebar.friends.map((friend) => (
-            <div>
+            <div key ={friend.id}>
               <span className={s.dot}></span>
               <div className={s.friendName}>{friend.name}</div>
             </div>

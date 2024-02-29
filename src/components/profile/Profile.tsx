@@ -1,11 +1,11 @@
 import { FC } from 'react'
 import { MyPosts } from './posts/MyPosts'
 import { ProfileInfo } from './profileInfo/ProfileInfo'
-import { RootStateType } from '../../redux/state'
+import { ActionType, RootStateType } from '../../redux/state'
 
 type ProfileProps = {
   state: RootStateType
-  dispatch: (action: any) => void
+  dispatch: (action: ActionType) => void
 }
 
 export const Profile: FC<ProfileProps> = ({ state, dispatch }) => {

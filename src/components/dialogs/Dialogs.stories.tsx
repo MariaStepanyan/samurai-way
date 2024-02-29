@@ -7,9 +7,10 @@ export default {
 }
 
 export const AllDialogs = () => {
+  const dispatch = store.dispatch
   return (
     <BrowserRouter>
-      <Dialogs state={store.getState()} />
+      <Dialogs state={store.getState()} dispatch={dispatch} />
     </BrowserRouter>
   )
 }

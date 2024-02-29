@@ -1,22 +1,26 @@
-import { FC } from 'react'
+import React from 'react'
+import { ChangeEvent, FC } from 'react'
 import s from './Dialogs.module.css'
 import { DialogItem } from './dialogItem/DialogItem'
 import { Message } from './message/Message'
-import { RootStateType } from '../../redux/state'
-import React from 'react'
+import { ActionType, RootStateType, addMessageAC, messageChangeAC } from '../../redux/state'
+import { Form } from '../common/Form'
 
 type DialogsProps = {
   state: RootStateType
+  dispatch: (action: ActionType) => void
 }
 
-export const Dialogs: FC<DialogsProps> = ({ state }) => {
-  const { dialogs, messages } = state.messagesPage
+export const Dialogs: FC<DialogsProps> = ({ state, dispatch }) => {
+  const { dialogs, messages, newMessageText } = state.messagesPage
 
-  const newMessageElement: any = React.createRef()
+  const sendMessage = () => {
+    dispatch(addMessageAC(newMessageText))
+  }
 
-  const sendMassage = () => {
-    const text = newMessageElement.current.value
-    alert(text)
+  const onMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    let text = e.currentTarget.value
+    dispatch(messageChangeAC(text))
   }
   return (
     <div className={s.dialogs}>
@@ -30,14 +34,12 @@ export const Dialogs: FC<DialogsProps> = ({ state }) => {
           <Message key={index} message={message.text} />
         ))}
       </div>
-      <div>
-        <div>
-          <textarea ref={newMessageElement}></textarea>
-        </div>
-        <div>
-          <button onClick={sendMassage}>send</button>
-        </div>
-      </div>
+      <Form
+        btnName={'send'}
+        newValueText={newMessageText}
+        onValueChange={onMessageChange}
+        onAddValue={sendMessage}
+      />
     </div>
   )
 }

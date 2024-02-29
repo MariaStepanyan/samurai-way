@@ -8,11 +8,11 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import { News } from './components/news/News'
 import { Music } from './components/music/Music'
 import { Settings } from './components/settings/Settings'
-import { storeType } from './redux/state'
+import { ActionType, storeType } from './redux/state'
 
 type AppProps = {
   store: storeType
-  dispatch: (action: any) => void
+  dispatch: (action: ActionType) => void
 }
 
 function App(props: AppProps) {
@@ -26,7 +26,7 @@ function App(props: AppProps) {
         <div className='app-wrapper-content'>
           <Route
             path={'/dialogs'}
-            render={() => <Dialogs state={store.getState()} />}
+            render={() => <Dialogs state={store.getState()} dispatch={dispatch}/>}
           />
           <Route
             path={'/Profile'}
