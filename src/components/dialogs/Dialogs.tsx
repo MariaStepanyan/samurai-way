@@ -3,7 +3,8 @@ import { ChangeEvent, FC } from 'react'
 import s from './Dialogs.module.css'
 import { DialogItem } from './dialogItem/DialogItem'
 import { Message } from './message/Message'
-import { ActionType, RootStateType, addMessageAC, messageChangeAC } from '../../redux/state'
+import { ActionType, RootStateType } from '../../redux/state'
+import { addMessageAC, messageChangeAC } from '../../redux/dialogs-reducer'
 import { Form } from '../common/Form'
 
 type DialogsProps = {
