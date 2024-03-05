@@ -1,29 +1,22 @@
 import { ChangeEvent, FC } from 'react'
 import s from './MyPosts.module.css'
 import { Post } from './post/Post'
-import { ActionType, RootStateType } from '../../../redux/state'
-import { addPostAC, postChangeAC } from '../../../redux/profile-reducer'
+import { PostType } from '../../../redux/profile-reducer'
 import { Form } from '../../common/Form'
+import { MyPostsPropsType } from './MyPostsContainer'
 
-type MyPostsProps = {
-  state: RootStateType
-  dispatch: (action: ActionType) => void
-}
-
-export const MyPosts: FC<MyPostsProps> = ({ state, dispatch }) => {
-  const { posts, newPostText } = state.profilePage
-
-  const postsElement = posts.map((post, index) => (
+export const MyPosts: FC<MyPostsPropsType> = (props) => {
+  const postsElement = props.posts.map((post, index) => (
     <Post key={index} text={post.text} like={post.like} />
   ))
 
   const onAddPost = () => {
-    dispatch(addPostAC(newPostText))
+    props.addPost(props.newPostText)
   }
 
   const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     let text = e.currentTarget.value
-    dispatch(postChangeAC(text))
+    props.postChange(text)
   }
 
   return (
@@ -31,7 +24,7 @@ export const MyPosts: FC<MyPostsProps> = ({ state, dispatch }) => {
       <h3>My Posts</h3>
       <Form
         btnName={'Add post'}
-        newValueText={newPostText}
+        newValueText={props.newPostText}
         onValueChange={onPostChange}
         onAddValue={onAddPost}
       />

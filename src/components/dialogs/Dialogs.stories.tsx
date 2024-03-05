@@ -1,16 +1,16 @@
 import { BrowserRouter } from 'react-router-dom'
-import { Dialogs } from './Dialogs'
 import { store } from '../../redux/state'
+import { DialogsContainer } from './DialogsContainer'
 
 export default {
-  component: Dialogs,
+  component: DialogsContainer,
 }
 
 export const AllDialogs = () => {
   const dispatch = store.dispatch
   return (
     <BrowserRouter>
-      <Dialogs state={store.getState()} dispatch={dispatch} />
+      <DialogsContainer />
     </BrowserRouter>
   )
 }

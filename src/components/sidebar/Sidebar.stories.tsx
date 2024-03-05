@@ -1,15 +1,14 @@
 import { BrowserRouter } from 'react-router-dom'
-import { Sidebar } from './Sidebar'
-import { store } from '../../redux/state'
+import { SidebarContainer } from './SidebarContainer'
 
 export default {
-  component: Sidebar,
+  component: SidebarContainer,
 }
 
 export const SidebarPage = () => {
   return (
     <BrowserRouter>
-      <Sidebar state= {store.getState()}/>
+      <SidebarContainer />
     </BrowserRouter>
   )
 }

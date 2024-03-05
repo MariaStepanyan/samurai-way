@@ -1,6 +1,5 @@
-import { store } from '../../redux/state'
 import { Profile } from './Profile'
-import { MyPosts } from './posts/MyPosts'
+import { MyPostsContainer } from './posts/MyPostsContainer'
 import { ProfileInfo } from './profileInfo/ProfileInfo'
 
 export default {
@@ -8,12 +7,10 @@ export default {
 }
 
 export const ProfilePage = () => {
-  const state = store.getState()
-  const dispatch = store.dispatch
   return (
     <div>
       <ProfileInfo />
-      <MyPosts state={state} dispatch={dispatch} />
+      <MyPostsContainer />
     </div>
   )
 }
