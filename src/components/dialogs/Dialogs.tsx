@@ -6,7 +6,6 @@ import { Message } from './message/Message'
 import { Form } from '../common/Form'
 import { MyPostsPropsType } from './DialogsContainer'
 
-
 export const Dialogs: FC<MyPostsPropsType> = (props) => {
   const sendMessage = () => {
     props.addMessage(props.newMessageText)
