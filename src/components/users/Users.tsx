@@ -53,6 +53,7 @@ export const Users = (props: MyUsersPropsType) => {
         <div key={u.id}>
           <div>
             <img src={u.photo} className={s.photo} />
+            <div>{u.fullName}</div>
             <div>
               {u.followed ? (
                 <button onClick={() => props.unFollow(u.id)}>unfollowed</button>
