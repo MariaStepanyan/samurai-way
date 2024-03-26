@@ -1,24 +1,42 @@
 export type UserType = {
   id: number
-  fullName: string
-  status: string
-  country: string
-  city: string
+  name: string
+  status: string | null
+  // country: string
+  // city: string
   followed: boolean
-  photo: string
+  photos: {
+    small: string | null
+    large: string | null
+  }
 }
 export type UsersType = {
   users: UserType[]
+  totalCount: number
+  error: null
+  pageSize: number
+  currentPage: number
 }
 
 type OnFollowACType = ReturnType<typeof onFollowAC>
 type OnUnFollowACType = ReturnType<typeof onUnFollowAC>
 type SetUsersACType = ReturnType<typeof setUsersAC>
+type SetCurrentPageACType = ReturnType<typeof setCurrentPageAC>
+type SetTotalCountACType = ReturnType<typeof setTotalCountAC>
 
-type ActionType = OnFollowACType | OnUnFollowACType | SetUsersACType
+type ActionType =
+  | OnFollowACType
+  | OnUnFollowACType
+  | SetUsersACType
+  | SetCurrentPageACType
+  | SetTotalCountACType
 
 let initialState: UsersType = {
   users: [],
+  totalCount: 0,
+  error: null,
+  pageSize: 10,
+  currentPage: 1,
 }
 
 export const userReducer = (
@@ -41,7 +59,11 @@ export const userReducer = (
         ),
       }
     case 'SET-USERS':
-      return { ...state, users: [...state.users, ...action.users] }
+      return { ...state, users: action.users }
+    case 'SET-CURRENT-PAGE':
+      return { ...state, currentPage: action.currentPage }
+    case 'SET-TOTAL-COUNT':
+      return { ...state, totalCount: action.totalCount }
     default:
       return state
   }
@@ -57,4 +79,10 @@ export const onUnFollowAC = (userId: number) => {
 
 export const setUsersAC = (users: UserType[]) => {
   return { type: 'SET-USERS', users } as const
+}
+export const setCurrentPageAC = (currentPage: number) => {
+  return { type: 'SET-CURRENT-PAGE', currentPage } as const
+}
+export const setTotalCountAC = (totalCount: number) => {
+  return { type: 'SET-TOTAL-COUNT', totalCount } as const
 }
