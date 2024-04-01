@@ -1,8 +1,11 @@
 import { NavLink } from 'react-router-dom'
 import s from './Sidebar.module.css'
-import { RootStateType, friendstype } from '../../redux/state'
 import { FC } from 'react'
-import { AppRootStateType } from '../../redux/redux-store'
+
+type friendstype = {
+  name: string
+  id: number
+}
 
 type SidebarType = {
   friends: friendstype[]

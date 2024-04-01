@@ -9,7 +9,7 @@ export default {
 export const ProfilePage = () => {
   return (
     <div>
-      <ProfileInfo />
+      {/* <ProfileInfo /> */}
       <MyPostsContainer />
     </div>
   )

@@ -9,6 +9,7 @@ import { Settings } from './components/settings/Settings'
 import { DialogsContainer } from './components/dialogs/DialogsContainer'
 import { SidebarContainer } from './components/sidebar/SidebarContainer'
 import { UsersContainer } from './components/users/UsersContainer'
+import ProfileContainer from './components/profile/ProfileContainer'
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         <SidebarContainer />
         <div className='app-wrapper-content'>
           <Route path={'/dialogs'} render={() => <DialogsContainer />} />
-          <Route path={'/Profile'} render={() => <Profile />} />
+          <Route path={'/Profile'} render={() => <ProfileContainer />} />
           <Route path={'/news'} render={() => <News />} />
           <Route path={'/music'} render={() => <Music />} />
           <Route path={'/settings'} render={() => <Settings />} />

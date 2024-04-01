@@ -1,5 +1,5 @@
 import { BrowserRouter } from 'react-router-dom'
-import { store } from '../../redux/state'
+// import { store } from '../../redux/state'
 import { DialogsContainer } from './DialogsContainer'
 
 export default {
@@ -7,7 +7,7 @@ export default {
 }
 
 export const AllDialogs = () => {
-  const dispatch = store.dispatch
+  // const dispatch = store.dispatch
   return (
     <BrowserRouter>
       <DialogsContainer />

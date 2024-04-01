@@ -1,4 +1,3 @@
-import { ActionType } from './state'
 import imgDimich from '../assets/images/Dimich.jpg'
 import imgAndrey from '../assets/images/Andrey.jpg'
 import imgViktor from '../assets/images/Viktor.jpg'
@@ -8,6 +7,11 @@ import imgSveta from '../assets/images/Sveta.jpg'
 
 const ADD_MESSAGE = 'ADD-MESSAGE'
 const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT'
+
+type AddMessageACType = ReturnType<typeof addMessageAC>
+type MessageChangeACType = ReturnType<typeof messageChangeAC>
+
+type ActionType =AddMessageACType | MessageChangeACType
 
 export type Dialogprops = {
   name: string

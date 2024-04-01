@@ -1,7 +1,12 @@
-import { ActionType } from './state'
+type AddPostAT = ReturnType<typeof addPostAC>
+type UpdatePostTextAT = ReturnType<typeof postChangeAC>
+type SetUserProfileAT = ReturnType<typeof setUserProfile>
+
+export type ActionType = AddPostAT | UpdatePostTextAT | SetUserProfileAT
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT'
+const SET_PROFILE_USER = 'SET-PROFILE-USER'
 
 export type PostType = {
   id: number
@@ -17,6 +22,7 @@ let initialState = {
     { id: 2, text: "it's my first post", like: 20 },
   ] as PostType[],
   newPostText: '',
+  profile: null,
 }
 
 export const profileReducer = (
@@ -33,6 +39,8 @@ export const profileReducer = (
       return { ...state, posts: [...state.posts, newPost], newPostText: '' }
     case UPDATE_POST_TEXT:
       return { ...state, newPostText: action.newText }
+    case SET_PROFILE_USER:
+      return { ...state, profile: action.profile }
     default:
       return state
   }
@@ -47,4 +55,10 @@ export const postChangeAC = (text: string) =>
   ({
     type: UPDATE_POST_TEXT,
     newText: text,
+  } as const)
+
+export const setUserProfile = (profile: any) =>
+  ({
+    type: SET_PROFILE_USER,
+    profile,
   } as const)

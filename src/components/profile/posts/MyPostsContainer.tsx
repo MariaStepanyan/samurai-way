@@ -19,6 +19,7 @@ const mapStateToProps = (state: AppRootStateType): InitialStateType => {
   return {
     posts: state.profilePage.posts,
     newPostText: state.profilePage.newPostText,
+    profile: state.profilePage.profile,
   }
 }
 

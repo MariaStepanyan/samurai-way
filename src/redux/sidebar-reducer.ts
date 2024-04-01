@@ -1,4 +1,6 @@
-import { ActionType } from './state'
+type SomeTypeACType = ReturnType<typeof someTypeAC>
+
+type ActionType = SomeTypeACType
 
 export type friendstype = {
   name: string
@@ -16,9 +18,16 @@ let initialState: SidebarType = {
   ],
 }
 
-export const sidebarReducer = (state: SidebarType = initialState, action: ActionType): SidebarType => {
+export const sidebarReducer = (
+  state: SidebarType = initialState,
+  action: ActionType
+): SidebarType => {
   switch (action.type) {
     default:
       return state
   }
+}
+
+export const someTypeAC = () => {
+  return { type: 'SOME-TYPE' } as const
 }
