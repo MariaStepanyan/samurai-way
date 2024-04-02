@@ -1,8 +1,9 @@
 import s from './users.module.css'
 import someAvatar from '../../assets/images/somePhoto.png'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { UserType } from '../../redux/users-reducer'
 import { NavLink } from 'react-router-dom'
+import { usersAPI } from '../../api/api'
 
 type UsersPropsType = {
   totalCount: number
@@ -44,18 +45,34 @@ export const Users: FC<UsersPropsType> = ({
       {users.map((u) => (
         <div key={u.id}>
           <div>
-            <NavLink to = {'/profile/' + u.id}>
-            <img
-              src={u.photos.small !== null ? u.photos.small : someAvatar}
-              className={s.photo}
-            />
+            <NavLink to={'/profile/' + u.id}>
+              <img
+                src={u.photos.small !== null ? u.photos.small : someAvatar}
+                className={s.photo}
+              />
             </NavLink>
             <div>{u.name}</div>
             <div>
               {u.followed ? (
-                <button onClick={() => unFollow(u.id)}>unfollowed</button>
+                <button
+                  onClick={() => {
+                    usersAPI.unFollowUser(u.id).then((res) => {
+                      unFollow(u.id)
+                    })
+                  }}
+                >
+                  unfollowed
+                </button>
               ) : (
-                <button onClick={() => follow(u.id)}>followed</button>
+                <button
+                  onClick={() => {
+                    usersAPI.followUser(u.id).then((res) => {
+                      follow(u.id)
+                    })
+                  }}
+                >
+                  followed
+                </button>
               )}
             </div>
             <div>{u.status}</div>

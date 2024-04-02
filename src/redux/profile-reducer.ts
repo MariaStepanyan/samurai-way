@@ -22,7 +22,27 @@ let initialState = {
     { id: 2, text: "it's my first post", like: 20 },
   ] as PostType[],
   newPostText: '',
-  profile: null,
+  profile: {
+    aboutMe: '',
+    contacts: {
+      facebook: '',
+      website: null,
+      vk: '',
+      twitter: '',
+      instagram: '',
+      youtube: null,
+      github: '',
+      mainLink: null,
+    },
+    lookingForAJob: true,
+    lookingForAJobDescription: '',
+    fullName: '',
+    userId: 0,
+    photos: {
+      small: '',
+      large: '',
+    },
+  },
 }
 
 export const profileReducer = (

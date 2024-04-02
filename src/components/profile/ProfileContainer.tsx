@@ -1,10 +1,10 @@
-import axios from 'axios'
 import React, { ComponentType } from 'react'
-import { Profile, ProfilePropsType } from './Profile'
+import { Profile } from './Profile'
 import { AppRootStateType } from '../../redux/redux-store'
 import { connect } from 'react-redux'
 import { setUserProfile } from '../../redux/profile-reducer'
-import { withRouter } from 'react-router-dom'
+import { RouteComponentProps, withRouter } from 'react-router-dom'
+import { profileAPI } from '../../api/api'
 
 export type ProfileType = {
   aboutMe: string
@@ -18,7 +18,7 @@ export type ProfileType = {
     github: string
     mainLink: null
   }
-  lookingForAJob: true
+  lookingForAJob: boolean
   lookingForAJobDescription: string
   fullName: string
   userId: number
@@ -27,6 +27,9 @@ export type ProfileType = {
     large: string
   }
 }
+// type PathParamsType = {
+//   userId: number
+// }
 
 type WithRouterContainerType = {
   match: {
@@ -42,23 +45,23 @@ type WithRouterContainerType = {
 type mapDispatchToPropsType = {
   setUserProfile: (profile: ProfileType) => void
 }
+type mapStateToPropsType = {
+  profile: ProfileType
+}
 
-export type MyUsersPropsType = mapDispatchToPropsType &
-  ProfilePropsType &
-  WithRouterContainerType
+type OwnUsersPropsType = mapDispatchToPropsType & mapStateToPropsType
+// type CommonUsersPropsType = OwnUsersPropsType & RouteComponentProps<PathParamsType>
+type CommonUsersPropsType = OwnUsersPropsType & WithRouterContainerType
 
-class ProfileContainer extends React.Component<MyUsersPropsType> {
+class ProfileContainer extends React.Component<CommonUsersPropsType> {
   componentDidMount(): void {
     let userId = this.props.match.params.userId
     if (!userId) {
       userId = 2
     }
-    axios
-      .get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-
-      .then((response) => {
-        this.props.setUserProfile(response.data)
-      })
+    profileAPI.getProfile(userId).then((data) => {
+      this.props.setUserProfile(data)
+    })
   }
 
   render() {
@@ -70,7 +73,7 @@ class ProfileContainer extends React.Component<MyUsersPropsType> {
   }
 }
 
-let mapStateToProps = (state: AppRootStateType) => {
+let mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
   return {
     profile: state.profilePage.profile,
   }

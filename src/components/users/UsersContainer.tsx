@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import { AppRootStateType } from '../../redux/redux-store'
-import axios from 'axios'
 import React from 'react'
 import { Users } from './Users'
 import {
@@ -13,8 +12,8 @@ import {
   toggleIsFetching,
   unFollow,
 } from '../../redux/users-reducer'
-import { Dispatch } from 'redux'
 import { Preload } from '../common/Preload'
+import { usersAPI } from '../../api/api'
 
 type mapDispatchToPropsType = {
   follow: (userId: number) => void
@@ -30,27 +29,22 @@ export type MyUsersPropsType = mapDispatchToPropsType & UsersType
 class UsersCC extends React.Component<MyUsersPropsType> {
   componentDidMount(): void {
     this.props.toggleIsFetching(true)
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
-      )
-
-      .then((response) => {
+    usersAPI
+      .getUsers(this.props.currentPage, this.props.pageSize)
+      .then((data) => {
         this.props.toggleIsFetching(false)
-        this.props.setUsers(response.data.items)
-        this.props.setTotalCount(response.data.totalCount)
+        this.props.setUsers(data.items)
+        this.props.setTotalCount(data.totalCount)
       })
   }
   onPageChanged = (p: number) => {
     this.props.toggleIsFetching(true)
     this.props.setCurrentPage(p)
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`
-      )
-      .then((response) => {
+    usersAPI
+      .getUsers(p, this.props.pageSize)
+      .then((data) => {
         this.props.toggleIsFetching(false)
-        this.props.setUsers(response.data.items)
+        this.props.setUsers(data.items)
       })
   }
   render() {
