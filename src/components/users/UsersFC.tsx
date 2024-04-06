@@ -10,31 +10,33 @@ export const Users = (props: MyUsersPropsType) => {
 
       .then((response) => props.setUsers(response.data.items))
   }
-  return (
-    <div>
-      {props.users.map((u) => (
-        <div key={u.id}>
-          <div>
-            <img
-              src={u.photos.small !== null ? u.photos.small : someAvatar}
-              className={s.photo}
-            />
-            <div>{u.name}</div>
-            <div>
-              {u.followed ? (
-                <button onClick={() => props.unFollow(u.id)}>unfollowed</button>
-              ) : (
-                <button onClick={() => props.follow(u.id)}>followed</button>
-              )}
-            </div>
-            <div>{u.status}</div>
-          </div>
-          <div>
-            <div>{'u.country'}</div>
-            <div>{'u.city'}</div>
-          </div>
-        </div>
-      ))}
-    </div>
-  )
+  return <></>
 }
+//   return (
+//     <div>
+//       {props.users.map((u) => (
+//         <div key={u.id}>
+//           <div>
+//             <img
+//               src={u.photos.small !== null ? u.photos.small : someAvatar}
+//               className={s.photo}
+//             />
+//             <div>{u.name}</div>
+//             <div>
+//               {u.followed ? (
+//                 <button onClick={() => props.unFollow(u.id)}>unfollowed</button>
+//               ) : (
+//                 <button onClick={() => props.follow(u.id)}>followed</button>
+//               )}
+//             </div>
+//             <div>{u.status}</div>
+//           </div>
+//           <div>
+//             <div>{'u.country'}</div>
+//             <div>{'u.city'}</div>
+//           </div>
+//         </div>
+//       ))}
+//     </div>
+//   )
+// }

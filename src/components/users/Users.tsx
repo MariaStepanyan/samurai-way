@@ -3,7 +3,6 @@ import someAvatar from '../../assets/images/somePhoto.png'
 import { FC } from 'react'
 import { UserType } from '../../redux/users-reducer'
 import { NavLink } from 'react-router-dom'
-import { usersAPI } from '../../api/api'
 
 type UsersPropsType = {
   totalCount: number
@@ -26,7 +25,6 @@ export const Users: FC<UsersPropsType> = ({
   unFollow,
   follow,
   folloingInProgress,
-  toggleFollowingProgress,
 }) => {
   const pagesCount = Math.ceil(totalCount / pageSize)
   let pages = []
@@ -61,11 +59,7 @@ export const Users: FC<UsersPropsType> = ({
                 <button
                   disabled={folloingInProgress.some((id) => id === u.id)}
                   onClick={() => {
-                    toggleFollowingProgress(true, u.id)
-                    usersAPI.unFollowUser(u.id).then((res) => {
-                      toggleFollowingProgress(false, u.id)
-                      unFollow(u.id)
-                    })
+                    unFollow(u.id)
                   }}
                 >
                   unfollowed
@@ -74,11 +68,7 @@ export const Users: FC<UsersPropsType> = ({
                 <button
                   disabled={folloingInProgress.some((id) => id === u.id)}
                   onClick={() => {
-                    toggleFollowingProgress(true, u.id)
-                    usersAPI.followUser(u.id).then((res) => {
-                      follow(u.id)
-                      toggleFollowingProgress(false, u.id)
-                    })
+                    follow(u.id)
                   }}
                 >
                   followed
