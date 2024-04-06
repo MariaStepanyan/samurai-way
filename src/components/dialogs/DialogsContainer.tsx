@@ -12,15 +12,21 @@ import { Dispatch } from 'redux'
 type mapDispatchToPropsType = {
   addMessage: (newMessageText: string) => void
   messageChange: (text: string) => void
+  
 }
 
-export type MyPostsPropsType = mapDispatchToPropsType & InitialStateType
+export type MyPostsPropsType = mapDispatchToPropsType & InitialStateType & isAuthType
 
-const mapStateToProps = (state: AppRootStateType): InitialStateType => {
+export type isAuthType = {
+  isAuth: boolean
+}
+
+const mapStateToProps = (state: AppRootStateType): InitialStateType & isAuthType => {
   return {
     dialogs: state.messagesPage.dialogs,
     messages: state.messagesPage.messages,
     newMessageText: state.messagesPage.newMessageText,
+    isAuth: state.auth.isAuth
   }
 }
 

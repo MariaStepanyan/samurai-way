@@ -9,6 +9,7 @@ import { SidebarContainer } from './components/sidebar/SidebarContainer'
 import { UsersContainer } from './components/users/UsersContainer'
 import ProfileContainer from './components/profile/ProfileContainer'
 import HeaderContainer from './components/header/HeaderContainer'
+import { Login } from './components/login/Login'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             render={() => <ProfileContainer />}
           />
           <Route path={'/news'} render={() => <News />} />
+          <Route path={'/login'} render={() => <Login />} />
           <Route path={'/music'} render={() => <Music />} />
           <Route path={'/settings'} render={() => <Settings />} />
           <Route path={'/users'} render={() => <UsersContainer />} />

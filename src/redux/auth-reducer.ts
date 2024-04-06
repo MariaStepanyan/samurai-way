@@ -7,7 +7,7 @@ type SetAuthUserType = ReturnType<typeof setAuthUser>
 
 type ActionType = SetAuthUserType
 
-export type InitialStateType = {
+export type InitialAuthStateType = {
   id: number
   email: string
   login: string
@@ -22,9 +22,9 @@ let initialState = {
 }
 
 export const authReducer = (
-  state: InitialStateType = initialState,
+  state: InitialAuthStateType = initialState,
   action: ActionType
-): InitialStateType => {
+): InitialAuthStateType => {
   switch (action.type) {
     case SET_USER_DATA:
       return { ...state, ...action.data, isAuth: true }
