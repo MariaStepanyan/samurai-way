@@ -41,7 +41,6 @@ type WithRouterContainerType = {
 }
 
 type mapDispatchToPropsType = {
-  setUserProfile: (profile: ProfileType) => void
   getProfile: (userId: number | undefined) => void
 }
 type mapStateToPropsType = {
@@ -76,6 +75,5 @@ const withRouterContainer = withRouter<any, ComponentType<any>>(
 )
 
 export default connect(mapStateToProps, {
-  setUserProfile,
   getProfile,
 })(withRouterContainer)

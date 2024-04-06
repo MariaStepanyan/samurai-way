@@ -6,7 +6,6 @@ import { getAuth, setAuthUser } from '../../redux/auth-reducer'
 import { authAPI } from '../../api/api'
 
 type mapDispatchToPropsType = {
-  setAuthUser: (id: number, email: string, login: string) => void
   getAuth: () => void
 }
 type mapStateToPropsType = {
@@ -31,6 +30,5 @@ let mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
 }
 
 export default connect(mapStateToProps, {
-  setAuthUser,
   getAuth,
 })(HeaderContainer)

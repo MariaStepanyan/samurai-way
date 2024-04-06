@@ -3,12 +3,7 @@ import { AppRootStateType } from '../../redux/redux-store'
 import React from 'react'
 import { Users } from './Users'
 import {
-  UserType,
   UsersType,
-  setCurrentPage,
-  setTotalCount,
-  setUsers,
-  toggleIsFetching,
   toggleFollowingProgress,
   getUsers,
   unFollowUser,
@@ -17,10 +12,6 @@ import {
 import { Preload } from '../common/Preload'
 
 type mapDispatchToPropsType = {
-  setUsers: (users: UserType[]) => void
-  setCurrentPage: (currentPage: number) => void
-  setTotalCount: (totalCount: number) => void
-  toggleIsFetching: (isFetch: boolean) => void
   toggleFollowingProgress: (isFetch: boolean, id: number) => void
   getUsers: (currentPage: number, pageSize: number) => void
   unFollowUser: (id: number) => void
@@ -69,10 +60,6 @@ let mapStateToProps = (state: AppRootStateType): UsersType => {
 }
 
 export const UsersContainer = connect(mapStateToProps, {
-  setUsers,
-  setCurrentPage,
-  setTotalCount,
-  toggleIsFetching,
   toggleFollowingProgress,
   getUsers,
   unFollowUser,
