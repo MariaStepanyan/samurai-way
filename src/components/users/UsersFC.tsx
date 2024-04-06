@@ -4,12 +4,12 @@ import s from './users.module.css'
 import someAvatar from '../../assets/images/somePhoto.png'
 
 export const Users = (props: MyUsersPropsType) => {
-  if (props.users.length === 0) {
-    axios
-      .get('https://social-network.samuraijs.com/api/1.0/users')
+  // if (props.users.length === 0) {
+  //   axios
+  //     .get('https://social-network.samuraijs.com/api/1.0/users')
 
-      .then((response) => props.setUsers(response.data.items))
-  }
+  //     .then((response) => props.setUsers(response.data.items))
+  // }
   return <></>
 }
 //   return (
