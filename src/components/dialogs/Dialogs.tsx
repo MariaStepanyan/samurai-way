@@ -5,7 +5,6 @@ import { DialogItem } from './dialogItem/DialogItem'
 import { Message } from './message/Message'
 import { Form } from '../common/Form'
 import { MyPostsPropsType } from './DialogsContainer'
-import { Redirect } from 'react-router-dom'
 
 export const Dialogs: FC<MyPostsPropsType> = (props) => {
   const sendMessage = () => {
@@ -16,7 +15,6 @@ export const Dialogs: FC<MyPostsPropsType> = (props) => {
     let text = e.currentTarget.value
     props.messageChange(text)
   }
-  if (!props.isAuth) return <Redirect to={'/login'} />
 
   return (
     <div className={s.dialogs}>

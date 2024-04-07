@@ -1,5 +1,5 @@
-import { Dispatch } from "redux"
-import { authAPI } from "../api/api"
+import { Dispatch } from 'redux'
+import { authAPI } from '../api/api'
 
 const SET_USER_DATA = 'SET-USER-DATA'
 
@@ -39,10 +39,11 @@ export const setAuthUser = (id: number, email: string, login: string) =>
     data: { id, email, login },
   } as const)
 
-  export const getAuth = () => (dispatch: Dispatch) => {
-    authAPI.getAuth().then((data) => {
-      if (data.resultCode === 0) {
-        const { id, email, login } = data.data
-        dispatch(setAuthUser(id, email, login))
-      }
-  })}
+export const getAuth = () => (dispatch: Dispatch) => {
+  authAPI.getAuth().then((data) => {
+    if (data.resultCode === 0) {
+      const { id, email, login } = data.data
+      dispatch(setAuthUser(id, email, login))
+    }
+  })
+}
