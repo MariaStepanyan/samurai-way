@@ -10,7 +10,7 @@ export const AllDialogs = () => {
   // const dispatch = store.dispatch
   return (
     <BrowserRouter>
-      <DialogsContainer />
+      {/* <DialogsContainer /> */}
     </BrowserRouter>
   )
 }

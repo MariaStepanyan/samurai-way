@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import './App.css'
 import { BrowserRouter, Route } from 'react-router-dom'
 import { News } from './components/news/News'
@@ -18,9 +18,14 @@ function App() {
         <HeaderContainer />
         <SidebarContainer />
         <div className='app-wrapper-content'>
-          <Route path={'/dialogs'} render={() => <DialogsContainer />} />
+          <Route
+            path={'/dialogs'}
+            // @ts-ignore
+            render={() => <DialogsContainer />}
+          />
           <Route
             path={'/Profile/:userId?'}
+            // @ts-ignore
             render={() => <ProfileContainer />}
           />
           <Route path={'/news'} render={() => <News />} />

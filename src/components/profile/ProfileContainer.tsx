@@ -7,6 +7,7 @@ import { Redirect, RouteComponentProps, withRouter } from 'react-router-dom'
 import { Login } from '../login/Login'
 import { isAuthType } from '../dialogs/DialogsContainer'
 import { withAuthRedirect } from '../hoc/withAuthRedirect'
+import { compose } from 'redux'
 export type ProfileType = {
   aboutMe: string
   contacts: {
@@ -68,16 +69,21 @@ class ProfileContainer extends React.Component<CommonUsersPropsType> {
   }
 }
 
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
-
+// let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
 
 let mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
   return { profile: state.profilePage.profile }
 }
-const withRouterContainer = withRouter<any, ComponentType<any>>(
-  AuthRedirectComponent
-)
+// const withRouterContainer = withRouter<any, ComponentType<any>>(
+//   AuthRedirectComponent
+// )
 
-export default connect(mapStateToProps, {
-  getProfile,
-})(withRouterContainer)
+// export default connect(mapStateToProps, {
+//   getProfile,
+// })(withRouterContainer)
+
+export default compose(
+  connect(mapStateToProps, { getProfile }),
+  withRouter,
+  withAuthRedirect
+)(ProfileContainer)
