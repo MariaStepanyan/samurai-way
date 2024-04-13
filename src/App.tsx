@@ -18,14 +18,9 @@ function App() {
         <HeaderContainer />
         <SidebarContainer />
         <div className='app-wrapper-content'>
-          <Route
-            path={'/dialogs'}
-            // @ts-ignore
-            render={() => <DialogsContainer />}
-          />
+          <Route path={'/dialogs'} render={() => <DialogsContainer />} />
           <Route
             path={'/Profile/:userId?'}
-            // @ts-ignore
             render={() => <ProfileContainer />}
           />
           <Route path={'/news'} render={() => <News />} />
