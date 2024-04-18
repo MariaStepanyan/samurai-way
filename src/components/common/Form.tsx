@@ -1,21 +1,25 @@
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
+import { FormControl } from './FormsControl'
+import { maxLengthCreator, required } from '../../utils/validators/validators'
 
 type FormType = {
   newBody: string
 }
-
+const maxLength30 = maxLengthCreator(30)
 export const Form: React.FC<InjectedFormProps<FormType>> = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
         <Field
-          component={'textarea'}
+          placeholder={'Enter your text'}
           name={'newBody'}
-          placeholder='Enter your message'
+          component={FormControl}
+          tagName='textarea'
+          validate={[required, maxLength30]}
         />
       </div>
       <div>
-        <button>send</button>
+        <button>add</button>
       </div>
     </form>
   )
