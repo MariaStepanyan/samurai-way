@@ -1,19 +1,18 @@
 import React from 'react'
-import { ChangeEvent, FC } from 'react'
+import { FC } from 'react'
 import s from './Dialogs.module.css'
 import { DialogItem } from './dialogItem/DialogItem'
 import { Message } from './message/Message'
-import { Form } from '../common/Form'
+import { AddMessageFormRedux } from '../common/Form'
 import { MyPostsPropsType } from './DialogsContainer'
 
-export const Dialogs: FC<MyPostsPropsType> = (props) => {
-  const sendMessage = () => {
-    props.addMessage(props.newMessageText)
-  }
+export type ValuesForm = {
+  newBody: string
+}
 
-  const onMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    let text = e.currentTarget.value
-    props.messageChange(text)
+export const Dialogs: FC<MyPostsPropsType> = (props) => {
+  const sendMessage = (values: ValuesForm) => {
+    props.addMessage(values.newBody)
   }
 
   return (
@@ -28,12 +27,7 @@ export const Dialogs: FC<MyPostsPropsType> = (props) => {
           <Message key={index} message={message.text} />
         ))}
       </div>
-      <Form
-        btnName={'send'}
-        newValueText={props.newMessageText}
-        onValueChange={onMessageChange}
-        onAddValue={sendMessage}
-      />
+      <AddMessageFormRedux onSubmit={sendMessage} />
     </div>
   )
 }

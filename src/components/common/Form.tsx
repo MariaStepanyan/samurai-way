@@ -1,24 +1,26 @@
-import { ChangeEvent } from 'react'
+import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 
 type FormType = {
-  btnName: string
-  newValueText: string
-  onValueChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
-  onAddValue: () => void
+  newBody: string
 }
 
-export const Form = (props: FormType) => {
+export const Form: React.FC<InjectedFormProps<FormType>> = (props) => {
   return (
-    <div>
+    <form onSubmit={props.handleSubmit}>
       <div>
-        <textarea
-          value={props.newValueText}
-          onChange={props.onValueChange}
-        ></textarea>
+        <Field
+          component={'textarea'}
+          name={'newBody'}
+          placeholder='Enter your message'
+        />
       </div>
       <div>
-        <button onClick={props.onAddValue}>{props.btnName}</button>
+        <button>send</button>
       </div>
-    </div>
+    </form>
   )
 }
+
+export const AddMessageFormRedux = reduxForm<FormType>({
+  form: 'AddMessageForm',
+})(Form)

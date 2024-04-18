@@ -6,12 +6,10 @@ import imgValera from '../assets/images/Valera.jpg'
 import imgSveta from '../assets/images/Sveta.jpg'
 
 const ADD_MESSAGE = 'ADD-MESSAGE'
-const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT'
 
 type AddMessageACType = ReturnType<typeof addMessageAC>
-type MessageChangeACType = ReturnType<typeof messageChangeAC>
 
-type ActionType =AddMessageACType | MessageChangeACType
+type ActionType = AddMessageACType
 
 export type Dialogprops = {
   name: string
@@ -39,7 +37,6 @@ let initialState = {
     { id: 2, text: 'Ah' },
     { id: 3, text: 'Hum' },
   ] as MessageType[],
-  newMessageText: '',
 }
 
 export const dialogsReducer = (
@@ -55,10 +52,7 @@ export const dialogsReducer = (
       return {
         ...state,
         messages: [...state.messages, newMessage],
-        newMessageText: '',
       }
-    case UPDATE_MESSAGE_TEXT:
-      return {...state, newMessageText: action.newText}
     default:
       return state
   }
@@ -68,9 +62,4 @@ export const addMessageAC = (newMessageText: string) =>
   ({
     type: ADD_MESSAGE,
     newMessageText: newMessageText,
-  } as const)
-export const messageChangeAC = (text: string) =>
-  ({
-    type: UPDATE_MESSAGE_TEXT,
-    newText: text,
   } as const)

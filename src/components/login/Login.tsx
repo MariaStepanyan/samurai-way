@@ -4,10 +4,9 @@ type FormData = {
   login: string
   password: string
   rememberMe: boolean
-
 }
 
-export const LoginForm:React.FC<InjectedFormProps<FormData>> = (props) => {
+export const LoginForm: React.FC<InjectedFormProps<FormData>> = (props) => {
   return (
     <>
       <form onSubmit={props.handleSubmit}>
@@ -18,7 +17,8 @@ export const LoginForm:React.FC<InjectedFormProps<FormData>> = (props) => {
           <Field placeholder='password' name={'password'} component={'input'} />
         </div>
         <div>
-          <Field type={'checkbox'} name={'rememberMe'} component={'input'} /> remember me
+          <Field type={'checkbox'} name={'rememberMe'} component={'input'} />{' '}
+          remember me
         </div>
         <div>
           <button>LOGIN</button>
@@ -28,16 +28,16 @@ export const LoginForm:React.FC<InjectedFormProps<FormData>> = (props) => {
   )
 }
 
-const LoginReduxForm = reduxForm<FormData>({form: 'login'})(LoginForm)
+const LoginReduxForm = reduxForm<FormData>({ form: 'login' })(LoginForm)
 
 export const Login = () => {
-  const onSubmit = (formData: FormData)=> {
-console.log(formData)
+  const onSubmit = (formData: FormData) => {
+    console.log(formData)
   }
   return (
     <>
       <h2>LOGIN</h2>
-      <LoginReduxForm onSubmit={onSubmit}/>
+      <LoginReduxForm onSubmit={onSubmit} />
     </>
   )
 }

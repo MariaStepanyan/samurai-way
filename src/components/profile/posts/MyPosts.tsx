@@ -1,33 +1,23 @@
-import { ChangeEvent, FC } from 'react'
+import { FC } from 'react'
 import s from './MyPosts.module.css'
 import { Post } from './post/Post'
-import { PostType } from '../../../redux/profile-reducer'
-import { Form } from '../../common/Form'
+import { AddMessageFormRedux } from '../../common/Form'
 import { MyPostsPropsType } from './MyPostsContainer'
+import { ValuesForm } from '../../dialogs/Dialogs'
 
 export const MyPosts: FC<MyPostsPropsType> = (props) => {
   const postsElement = props.posts.map((post, index) => (
     <Post key={index} text={post.text} like={post.like} />
   ))
 
-  const onAddPost = () => {
-    props.addPost(props.newPostText)
-  }
-
-  const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    let text = e.currentTarget.value
-    props.postChange(text)
+  const onAddPost = (values: ValuesForm) => {
+    props.addPost(values.newBody)
   }
 
   return (
     <div className={s.postsBlock}>
       <h3>My Posts</h3>
-      <Form
-        btnName={'Add post'}
-        newValueText={props.newPostText}
-        onValueChange={onPostChange}
-        onAddValue={onAddPost}
-      />
+      <AddMessageFormRedux onSubmit={onAddPost} />
       <div className={s.posts}>{postsElement}</div>
     </div>
   )
