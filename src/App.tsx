@@ -9,7 +9,7 @@ import { SidebarContainer } from './components/sidebar/SidebarContainer'
 import { UsersContainer } from './components/users/UsersContainer'
 import ProfileContainer from './components/profile/ProfileContainer'
 import HeaderContainer from './components/header/HeaderContainer'
-import { Login } from './components/login/Login'
+import Login from './components/login/Login'
 
 function App() {
   return (
@@ -19,10 +19,7 @@ function App() {
         <SidebarContainer />
         <div className='app-wrapper-content'>
           <Route path={'/dialogs'} render={() => <DialogsContainer />} />
-          <Route
-            path={'/Profile/:userId?'}
-            render={() => <ProfileContainer />}
-          />
+          <Route path={'/Profile/:userId?'} render={() => <ProfileContainer />} />
           <Route path={'/news'} render={() => <News />} />
           <Route path={'/login'} render={() => <Login />} />
           <Route path={'/music'} render={() => <Music />} />

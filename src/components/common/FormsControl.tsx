@@ -6,12 +6,7 @@ type FormControlProps = WrappedFieldProps & {
   tagName: 'textarea' | 'input'
 }
 
-export const FormControl: FC<FormControlProps> = ({
-  input,
-  meta,
-  tagName,
-  ...props
-}) => {
+export const FormControl: FC<FormControlProps> = ({ input, meta, tagName, ...props }) => {
   const hasError = meta.touched && meta.error
   const Tag = tagName
 

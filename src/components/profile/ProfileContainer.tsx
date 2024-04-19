@@ -4,7 +4,6 @@ import { AppRootStateType } from '../../redux/redux-store'
 import { connect } from 'react-redux'
 import { getProfile, getProfileStatus, setUserProfile, updateProfileStatus } from '../../redux/profile-reducer'
 import { Redirect, RouteComponentProps, withRouter } from 'react-router-dom'
-import { Login } from '../login/Login'
 import { isAuthType } from '../dialogs/DialogsContainer'
 import { withAuthRedirect } from '../hoc/withAuthRedirect'
 import { compose } from 'redux'
@@ -61,7 +60,7 @@ type CommonUsersPropsType = OwnUsersPropsType & WithRouterContainerType
 class ProfileContainer extends React.Component<CommonUsersPropsType> {
   componentDidMount(): void {
     let userId = this.props.match.params.userId
-    if(!userId) {
+    if (!userId) {
       userId = 30852
     }
     this.props.getProfile(this.props.match.params.userId)
@@ -71,18 +70,30 @@ class ProfileContainer extends React.Component<CommonUsersPropsType> {
   render() {
     return (
       <>
-        <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateProfileStatus= {this.props.updateProfileStatus}/>
+        <Profile
+          {...this.props}
+          profile={this.props.profile}
+          status={this.props.status}
+          updateProfileStatus={this.props.updateProfileStatus}
+        />
       </>
     )
   }
 }
 
 let mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
-  return { profile: state.profilePage.profile, status:state.profilePage.status }
+  return {
+    profile: state.profilePage.profile,
+    status: state.profilePage.status,
+  }
 }
 
 export default compose<React.ComponentType>(
-  connect(mapStateToProps, { getProfile, getProfileStatus, updateProfileStatus }),
+  connect(mapStateToProps, {
+    getProfile,
+    getProfileStatus,
+    updateProfileStatus,
+  }),
   withRouter,
   withAuthRedirect
 )(ProfileContainer)

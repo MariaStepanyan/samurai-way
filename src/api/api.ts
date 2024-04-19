@@ -7,9 +7,7 @@ const instance = axios.create({
 
 export const usersAPI = {
   getUsers(currentPage: number, pageSize: number) {
-    return instance
-      .get(`users?page=${currentPage}&count=${pageSize}`)
-      .then((res) => res.data)
+    return instance.get(`users?page=${currentPage}&count=${pageSize}`).then((res) => res.data)
   },
   unFollowUser(id: number) {
     return instance.delete(`follow/${id}`)
@@ -23,9 +21,14 @@ export const authAPI = {
   getAuth() {
     return instance.get(`auth/me`).then((res) => res.data)
   },
-  logIn(params: LoginParamsType) {
+  logIn(email: string, password: string, rememberMe: boolean, captcha?: boolean) {
     return instance
-      .post<ResponseType>(`auth/login`, params)
+      .post<ResponseType>(`auth/login`, {
+        email,
+        password,
+        rememberMe,
+        captcha,
+      })
       .then((res) => res.data)
   },
   logOut() {
@@ -45,7 +48,7 @@ export const profileAPI = {
   },
 }
 
-type LoginParamsType = {
+export type LoginParamsType = {
   email: string
   password: string
   rememberMe: boolean

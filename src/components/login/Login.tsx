@@ -1,6 +1,10 @@
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 import { FormControl } from '../common/FormsControl'
 import { maxLengthCreator, required } from '../../utils/validators/validators'
+import { login } from '../../redux/auth-reducer'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+import { AppRootStateType } from '../../redux/redux-store'
 
 type FormData = {
   login: string
@@ -8,8 +12,8 @@ type FormData = {
   rememberMe: boolean
 }
 
+const maxLength30 = maxLengthCreator(30)
 const maxLength20 = maxLengthCreator(20)
-const maxLength10 = maxLengthCreator(10)
 
 export const LoginForm: React.FC<InjectedFormProps<FormData>> = (props) => {
   return (
@@ -21,7 +25,7 @@ export const LoginForm: React.FC<InjectedFormProps<FormData>> = (props) => {
             name={'login'}
             component={FormControl}
             tagName='input'
-            validate={[required, maxLength20]}
+            validate={[required, maxLength30]}
           />
         </div>
         <div>
@@ -31,12 +35,11 @@ export const LoginForm: React.FC<InjectedFormProps<FormData>> = (props) => {
             name={'password'}
             component={FormControl}
             tagName='input'
-            validate={[required, maxLength10]}
+            validate={[required, maxLength20]}
           />
         </div>
         <div>
-          <Field type={'checkbox'} name={'rememberMe'} component={'input'} />{' '}
-          remember me
+          <Field type={'checkbox'} name={'rememberMe'} component={'input'} /> remember me
         </div>
         <div>
           <button>LOGIN</button>
@@ -48,9 +51,12 @@ export const LoginForm: React.FC<InjectedFormProps<FormData>> = (props) => {
 
 const LoginReduxForm = reduxForm<FormData>({ form: 'login' })(LoginForm)
 
-export const Login = () => {
+const Login = (props: any) => {
   const onSubmit = (formData: FormData) => {
-    console.log(formData)
+    props.login(formData.login, formData.password, formData.rememberMe)
+  }
+  if (props.isAuth) {
+    return <Redirect to={'/profile'} />
   }
   return (
     <>
@@ -59,3 +65,9 @@ export const Login = () => {
     </>
   )
 }
+
+const mapStateToProps = (state: AppRootStateType) => ({
+  isAuth: state.auth.isAuth,
+})
+
+export default connect(mapStateToProps, { login })(Login)
