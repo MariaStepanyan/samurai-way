@@ -4,11 +4,10 @@ import { Post } from './post/Post'
 import { AddMessageFormRedux } from '../../common/Form'
 import { MyPostsPropsType } from './MyPostsContainer'
 import { ValuesForm } from '../../dialogs/Dialogs'
+import React from 'react'
 
-export const MyPosts: FC<MyPostsPropsType> = (props) => {
-  const postsElement = props.posts.map((post, index) => (
-    <Post key={index} text={post.text} like={post.like} />
-  ))
+export const MyPosts: FC<MyPostsPropsType> = React.memo((props) => {
+  const postsElement = props.posts.map((post, index) => <Post key={index} text={post.text} like={post.like} />)
 
   const onAddPost = (values: ValuesForm) => {
     props.addPost(values.newBody)
@@ -21,4 +20,4 @@ export const MyPosts: FC<MyPostsPropsType> = (props) => {
       <div className={s.posts}>{postsElement}</div>
     </div>
   )
-}
+})
