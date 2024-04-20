@@ -4,10 +4,7 @@ import { profileAPI } from '../api/api'
 type AddPostAT = ReturnType<typeof addPostAC>
 type SetUserProfileAT = ReturnType<typeof setUserProfile>
 
-export type ActionType =
-  | AddPostAT
-  | SetUserProfileAT
-  | ReturnType<typeof setUserProfileStatusAC>
+export type ActionType = AddPostAT | SetUserProfileAT | ReturnType<typeof setUserProfileStatusAC>
 
 const ADD_POST = 'ADD-POST'
 const SET_PROFILE_USER = 'SET-PROFILE-USER'
@@ -51,10 +48,7 @@ let initialState = {
   status: '',
 }
 
-export const profileReducer = (
-  state: InitialStateType = initialState,
-  action: ActionType
-): InitialStateType => {
+export const profileReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
   switch (action.type) {
     case ADD_POST:
       const newPost: PostType = {
@@ -89,25 +83,23 @@ export const setUserProfile = (profile: any) =>
     profile,
   } as const)
 
-export const getProfile =
-  (userId: number | undefined) => (dispatch: Dispatch) => {
-    if (!userId) {
-      userId = 30852
-    }
-    profileAPI.getProfile(userId).then((data) => {
-      dispatch(setUserProfile(data))
-    })
+export const getProfile = (userId?: number | null) => (dispatch: Dispatch) => {
+  if (!userId) {
+    userId = 30852
   }
+  profileAPI.getProfile(userId).then((data) => {
+    dispatch(setUserProfile(data))
+  })
+}
 
-export const getProfileStatus =
-  (userId: number | undefined) => (dispatch: Dispatch) => {
-    if (!userId) {
-      userId = 30852
-    }
-    profileAPI.getProfileStatus(userId).then((data) => {
-      dispatch(setUserProfileStatusAC(data))
-    })
+export const getProfileStatus = (userId?: number | null) => (dispatch: Dispatch) => {
+  if (!userId) {
+    userId = 30852
   }
+  profileAPI.getProfileStatus(userId).then((data) => {
+    dispatch(setUserProfileStatusAC(data))
+  })
+}
 
 export const updateProfileStatus = (status: string) => (dispatch: Dispatch) => {
   profileAPI.updateStatus(status).then((data) => {

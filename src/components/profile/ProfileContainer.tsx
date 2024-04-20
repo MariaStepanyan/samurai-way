@@ -36,7 +36,7 @@ type WithRouterContainerType = {
   match: {
     isExact: boolean
     params: {
-      userId: undefined | number
+      userId: number | null
     }
     path: string
     url: string
@@ -51,6 +51,8 @@ type mapDispatchToPropsType = {
 type mapStateToPropsType = {
   profile: ProfileType
   status: string
+  authorisedUserId: number | null
+  isAuth: boolean
 }
 
 type OwnUsersPropsType = mapDispatchToPropsType & mapStateToPropsType
@@ -61,10 +63,13 @@ class ProfileContainer extends React.Component<CommonUsersPropsType> {
   componentDidMount(): void {
     let userId = this.props.match.params.userId
     if (!userId) {
-      userId = 30852
+      userId = this.props.authorisedUserId
+      // if (!userId) {
+      //   ;(this.props as any).history.push('/login')
+      // }
     }
-    this.props.getProfile(this.props.match.params.userId)
-    this.props.getProfileStatus(this.props.match.params.userId)
+    this.props.getProfile(userId as number)
+    this.props.getProfileStatus(userId as number)
   }
 
   render() {
@@ -85,6 +90,8 @@ let mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
   return {
     profile: state.profilePage.profile,
     status: state.profilePage.status,
+    authorisedUserId: state.auth.id,
+    isAuth: state.auth.isAuth,
   }
 }
 
