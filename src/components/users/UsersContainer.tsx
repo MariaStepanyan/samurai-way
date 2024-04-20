@@ -2,14 +2,17 @@ import { connect } from 'react-redux'
 import { AppRootStateType } from '../../redux/redux-store'
 import React from 'react'
 import { Users } from './Users'
-import {
-  UsersType,
-  toggleFollowingProgress,
-  getUsers,
-  unFollowUser,
-  followUser,
-} from '../../redux/users-reducer'
+import { UsersType, toggleFollowingProgress, getUsers, unFollowUser, followUser } from '../../redux/users-reducer'
 import { Preload } from '../common/Preload'
+import {
+  getAllUsers,
+  getCurrentPage,
+  getError,
+  getFolloingInProgress,
+  getIsFetching,
+  getPageSize,
+  getTotalCount,
+} from '../../redux/selectors/selectors'
 
 type mapDispatchToPropsType = {
   toggleFollowingProgress: (isFetch: boolean, id: number) => void
@@ -49,13 +52,13 @@ class UsersCC extends React.Component<MyUsersPropsType> {
 
 let mapStateToProps = (state: AppRootStateType): UsersType => {
   return {
-    users: state.usersPage.users,
-    totalCount: state.usersPage.totalCount,
-    error: state.usersPage.error,
-    pageSize: state.usersPage.pageSize,
-    currentPage: state.usersPage.currentPage,
-    isFetching: state.usersPage.isFetching,
-    folloingInProgress: state.usersPage.folloingInProgress,
+    users: getAllUsers(state),
+    totalCount: getTotalCount(state),
+    error: getError(state),
+    pageSize: getPageSize(state),
+    currentPage: getCurrentPage(state),
+    isFetching: getIsFetching(state),
+    folloingInProgress: getFolloingInProgress(state),
   }
 }
 
