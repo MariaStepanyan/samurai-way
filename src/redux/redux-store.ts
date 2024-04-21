@@ -15,9 +15,10 @@ const rootReducer = combineReducers({
   usersPage: userReducer,
   auth: authReducer,
   form: formReducer,
-  app: appReducer
+  app: appReducer,
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
+export type AppDispatchType = typeof store.dispatch
